@@ -8,3 +8,6 @@ pacakages-lock.json
 # build folder
 
 build
+
+git clone https://github.com/Gourrege/OSDBE_V3.git
+cd app
