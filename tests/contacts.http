@@ -1,0 +1,165 @@
+@enpoint = http://localhost:3001/api/v1/driver
+@enpoint2 = http://localhost:3001/api/v1/tracks
+
+@authEndpoint = http://localhost:3001/api/v1
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OTQxNzdiMzJlYzAzZGI1M2I0YjdlYWYiLCJlbWFpbCI6Im9zY2FyLnBpYXN0cmkubWNsYXJlbi5jb20iLCJpYXQiOjE2OTg0MTczNTV9.W6bX3o1bXq4Yk2bX4Z1k3KX1jF2Q8v3y5G7v3yF3xX8
+
+###
+### POST Request for a Driver 
+## Expected result is Driver Created
+POST {{enpoint}} HTTP/1.1
+content-type: application/json
+x-api-key: blahblah
+
+{
+  "name": "Joe Soap",
+  "email": "joe.soap@test.com",
+  "password": "Soap123!",
+  "role": "creator",
+  "racingNumber": 34,
+  "nationality": "Australian",
+  "driverImage": "https://www.esquire.com.au/wp-content/uploads/2023/08/Side-by-Side-24-768x1024.png",
+  "driverTeam": "Mclaren F1 Team",
+  "driverDES": "Rapid-rising young talent, known for his fearless overtaking and natural pace.",
+  "wins": 0,
+  "podiums": 0,
+  "driverWC": 0,
+  "dob": "2005-05-08"
+}
+
+###
+### POST Request for a Driver which fails Validation
+POST {{enpoint}} HTTP/1.1
+content-type: application/json
+x-api-key: blahblah
+
+{
+  "name": "Max Verstappen",
+  "racingNumber": "",
+  "nationality": "Dutch",
+  "driverImage": "https://img.redbull.com/images/c_limit,w_1500,h_1000/f_auto,q_auto/redbullcom/2025/3/19/jropt3j8nmsghhaqc8na/max-verstappen-portrait-2025",
+  "driverTeam": "Red Bull Racing",
+  "driverDES": "Aggressive and consistent driver, known for precision and pace.",
+  "wins": "61",
+  "podiums": "98",
+  "driverWC": "4",
+  "dob": "1994-09-30"
+}
+
+
+###
+GET {{enpoint}}/6823a9d420badebb23c6c436 HTTP/1.1
+content-type: application/json
+x-api-key: blahblah
+
+
+//GET request that gets by ID
+###
+GET {{enpoint}} HTTP/1.1
+Content-Type: application/json
+x-api-key: blahblah
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkcml2ZXJJZCI6IjY5NDQ1OGM5ZTdmYjU0YTBmMDE4MjYwNSIsImVtYWlsIjoiam9lLnNvYXBAdGVzdC5jb20iLCJyb2xlIjoiY3JlYXRvciIsImlhdCI6MTc2ODg1NzA0OSwiZXhwIjoxNzY4ODU3OTQ5fQ.6Tfvbu1uw_JN25J5FlK7uLfEDnUhfaFKbddxFU1YM_Y
+
+
+
+//GET request that fails
+###
+GET {{enpoint}}/driver1 HTTP/1.1
+Content-Type: application/json
+x-api-key: blahblah
+
+//DELETE request
+###
+DELETE  {{enpoint}}/6823a9d420badebb23c6c436 HTTP/1.1
+Content-Type: application/json
+x-api-key: blahblah
+
+//DELETE request that fails because there is no ID
+###
+DELETE  {{enpoint}}/6823a9a320badebb23c6c435 HTTP/1.1
+Content-Type: application/json
+x-api-key: blahblah
+
+
+// PUT request that Updates a Driver
+###
+PUT {{enpoint}}/68f54348db95a4302af901ed HTTP/1.1
+content-type: application/json
+x-api-key: blahblah
+
+{
+    "name": "Lando Norris",
+    "racingNumber": "4",
+    "nationality": "British",
+    "driverImage": "https://cdn-3.motorsport.com/images/mgl/Y99BbQG0/s8/lando-norris-mclaren-1.jpg",
+    "driverTeam": "McLaren",
+    "driverDES": "Quick and composed racer with excellent qualifying pace and strong racecraft.",
+    "wins": "3",
+    "podiums": "22",
+    "driverWC": "0",
+    "dob": "1999-11-13"
+  }
+
+  // PUT request that fails
+###
+PUT {{enpoint}}/68f5365d9c140e0d419478h8 HTTP/1.1
+content-type: application/json
+x-api-key: blahblah
+
+{
+    "name": "Lando Norris"
+}
+
+
+// PUT request that no reaource can be found
+###
+PUT {{enpoint}}/68f29b78edbd5872ed056275 HTTP/1.1
+content-type: application/json
+x-api-key: blahblah
+
+{
+    "name": "Lando Norris",
+    "racingNumber": "4",
+    "nationality": "British",
+    "driverImage": "https://cdn-3.motorsport.com/images/mgl/Y99BbQG0/s8/lando-norris-mclaren-1.jpg",
+    "driverTeam": "McLaren",
+    "driverDES": "Quick and composed racer with excellent qualifying pace and strong racecraft.",
+    "wins": "3",
+    "podiums": "22",
+    "driverWC": "0",
+    "dob": "13-13-1949"
+  }
+
+
+
+
+
+
+###
+### POST Request for a Driver 
+## Expected result is Driver Created
+### POST Request — Create Track
+POST {{enpoint2}} HTTP/1.1
+content-type: application/json
+x-api-key: blahblah
+
+{
+  "fiaTrackName": "Bahrain International Circuit",
+  "trackLayout": "Grand Prix Layout",
+  "circuitName": "Sakhir",
+  "trackLocation": "Sakhir, Bahrain",
+  "numDRSZones": "3",
+  "trackLength": "5.412 km",
+  "qualiFL": "1:27.097",
+  "raceFL": "1:32.478"
+}
+
+### POST Request for a Track which fails Validation
+POST {{authEndpoint}}/auth/login HTTP/1.1
+content-type: application/json
+
+{
+  "email": "joe.soap@test.com",
+  "password": "Soap123!"
+}
